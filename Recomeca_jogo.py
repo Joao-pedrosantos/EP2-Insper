@@ -1,5 +1,7 @@
 def recomeca_jogo():
+    
     if a == "s":
-        return seleciona_cartas
+        return inicia_jogo()
     else:
         return "Obrigado por jogar!"
+
