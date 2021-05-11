@@ -8,10 +8,9 @@ def possui_movimentos_possiveis(baralho):
     return False
 
 def empilha(baralho,origem,fim):
-    cartas = baralho
-    cartas[fim] = baralho[origem]
-    del cartas[origem]
-    return cartas
+    baralho[fim] = baralho[origem]
+    del baralho[origem]
+    return baralho
 
 def lista_movimentos_possiveis(baralho,posicao):
     movi = []
@@ -97,17 +96,15 @@ def mostra_baralho(baralho):
     print("Status atual do baralho:")
     while i < len(baralho):
         #print(Fore.RED + 'some red text')
-        print("{0} - {1}".format(i+1,baralho[i]))
+        print("{0} - {1}".format(i + 1,baralho[i]))
         i += 1
 
-def mostra_movimentos_possiveis(baralho,movimentos):
+def mostra_movimentos_possiveis(baralho, posicao, movimentos):
     i = 0 
     while i < len(movimentos):
-        carta = movimentos[i]
-        print("{0} - {1}".format(i+1,baralho[carta]))
+        carta = posicao - movimentos[i]
+        print("{0} - {1}".format(i + 1, baralho[carta]))
         i += 1
-
-
 
 def inicia_jogo():
     print("Bem vindo ao paciencia!")
@@ -141,21 +138,25 @@ def inicia_jogo():
                     if len(movimentos) == 0:
                         print("A carta {0} nao pode ser movida. ".format(baralho[carta-1]))
                     elif len(movimentos) == 1:
-                        empilha(baralho,carta-1,movimentos[0])
+                        empilha(baralho,carta-1,carta - (1 + movimentos[0]))
                     else:
                         escolheu = False
                         while not escolheu:
                             print("Essa carta pode ter dois ou mais movimentos.")
-                            mostra_movimentos_possiveis(baralho,movimentos)
+                            mostra_movimentos_possiveis(baralho, carta - 1, movimentos)
                             escolha = int(input("Escolha qual quer fazer: "))
                             if escolha >= 1 and escolha <= len(movimentos):
-                                empilha(baralho,escolha-1,movimentos[escolha-1])
+                                empilha(baralho, carta - 1, carta - (1 + movimentos[escolha-1]))
                                 escolheu = True
                             else:
                                 print("Movimento invalido. Tente novamente")                    
                 else: 
                     print("Carta fora do baralho")
                 fim_de_jogo = not possui_movimentos_possiveis(baralho)
+    if len(baralho) == 1:
+        print("Parabens! Você conseguiu!! GG!")
+    else:
+        print('Boa tentativa! Mais sorte na proxima!')
     tenta_novamente = recomeca_jogo()
 inicia_jogo()
 

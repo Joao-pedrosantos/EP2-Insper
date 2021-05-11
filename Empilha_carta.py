@@ -1,5 +1,5 @@
 def empilha(baralho,origem,fim):
-    cartas = baralho
-    cartas[fim] = baralho[origem]
-    del cartas[origem]
+    print("FIM: {0} - {1}".format(fim, baralho[fim]))
+    baralho[fim] = baralho[origem]
+    del baralho[origem]
     return cartas
