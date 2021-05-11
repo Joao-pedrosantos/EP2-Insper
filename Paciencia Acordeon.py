@@ -103,7 +103,7 @@ def mostra_baralho(baralho):
             cor = 34
         else:  
             cor = 31
-        print("\033[1;37;40m{0} -\033[1;{1};40m {2}".format(i + 1,cor,baralho[i]))
+        print("\033[1;37;40m{0} -\033[1;{1};40m {2}\033[1;37;40m".format(i + 1,cor,baralho[i]))
         i += 1
 
 def mostra_movimentos_possiveis(baralho, posicao, movimentos):
