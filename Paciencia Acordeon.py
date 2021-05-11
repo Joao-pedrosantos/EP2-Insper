@@ -91,12 +91,19 @@ def cria_baralho():
     return baralho 
 
 def mostra_baralho(baralho):
-    #from colorama import Fore
     i = 0
     print("Status atual do baralho:")
     while i < len(baralho):
-        #print(Fore.RED + 'some red text')
-        print("{0} - {1}".format(i + 1,baralho[i]))
+        naipe = extrai_naipe(baralho[i])
+        if naipe == "♣":
+            cor = 32
+        elif naipe == '♦':
+            cor = 33
+        elif naipe == '♠':
+            cor = 34
+        else:  
+            cor = 31
+        print("\033[1;37;40m{0} -\033[1;{1};40m {2}".format(i + 1,cor,baralho[i]))
         i += 1
 
 def mostra_movimentos_possiveis(baralho, posicao, movimentos):
@@ -159,4 +166,5 @@ def inicia_jogo():
         print('Boa tentativa! Mais sorte na proxima!')
     tenta_novamente = recomeca_jogo()
 inicia_jogo()
+
 
